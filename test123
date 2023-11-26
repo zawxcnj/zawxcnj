@@ -1,0 +1,448 @@
+task.spawn(function()
+game.CoreGui:FindFirstChild("Discord"):Remove()
+end)
+task.spawn(function()
+game.Workspace.Enemies["SetInstances"]:Remove()
+end)
+getgenv().fruit1 = workspace.UserData['User_'..game.Players.LocalPlayer.UserId].Data["DevilFruit"].Value
+getgenv().fruit2 = workspace.UserData['User_'..game.Players.LocalPlayer.UserId].Data["DevilFruit2"].Value
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   task.wait(1)
+   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+getgenv().name = tostring(math.random(1, 99999))
+local one = Instance.new("Part", workspace)
+one.Anchored = true
+one.Size = Vector3.new(300, 0.5, 300)
+one.Name = getgenv().name
+one.Position = Vector3.new(math.random(1, 99999), 100000, math.random(1, 99999))
+getgenv().FlySpeed = 20
+local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/dawid-scripts/UI-Libs/main/discord%20lib.txt")()
+
+local win = DiscordLib:Window("One Piece Legendary Made By FLORS#8421")
+
+local serv = win:Server("", "http://www.roblox.com/asset/?id=6031075938")
+
+local flors = serv:Channel("Main")
+
+flors:Toggle("Juice Farm",false, function(flors)
+getgenv().Juice = flors
+task.spawn(function()
+while getgenv().Juice do task.wait(0.1)
+for i,v in pairs(workspace.Barrels:GetDescendants()) do
+    if v.Parent ~= "Configure" and v:IsA("ClickDetector") and v.MaxActivationDistance ~= 0 and v.Parent.Name ~= "Configure" then
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(Vector3.new(v.Parent.Position.X,v.Parent.Position.Y + 2, v.Parent.Position.Z))
+	task.wait(0.1)
+    fireclickdetector(v, math.huge)
+    end
+  end
+ end
+end)
+task.spawn(function()
+while getgenv().Juice do task.wait(2)
+local user = workspace.UserData['User_'..game.Players.LocalPlayer.UserId]
+local args = {
+    [1] = "Claim",
+    [2] = "Challenge13"
+}
+user.ChallengesRemote:FireServer(unpack(args))
+end
+end)
+while getgenv().Juice do task.wait(0.1)
+for i,v in pairs(game:GetService("Workspace").Island8:GetDescendants()) do
+if v.Name == "Bowl" or v.Name == "Mixer1" or v.Name == "Mixer2" then
+fireclickdetector(v.ClickDetector)
+end
+end
+end
+end)
+ flors:Toggle("Auto Drink",false, function(bozo3)
+ getgenv().Drink = bozo3
+local plr = game.Players.LocalPlayer
+local backpack = plr.Backpack
+local humanoid = plr.Character:FindFirstChild('Humanoid') or workspace:FindFirstChild(game:GetService('Players').LocalPlayer.Name):FindFirstChild('Humanoid')
+local juices = {
+    'Juice',
+    'Cider',
+    'Lemonade',
+    'Smoothie',
+    'Banana Juice',
+    'Coconut Milk',
+    'Fruit Juice',
+    'Sour Juice',
+    'Pumpkin Juice',
+    'Apple Juice',
+    'Golden Apple',
+    'Juice+',
+    'Cider+',
+    'Lemonade+',
+    'Smoothie+'
+}
+
+while getgenv().Drink do task.wait(0.1)
+    for _, v in pairs(backpack:GetChildren()) do
+        if table.find(juices, v.Name) then
+            v.Parent = game.Players.LocalPlayer.Character
+            v:Activate()
+        end
+      end
+    end
+ end)
+flors:Toggle("Hit Kill Npcs",false, function(bozo2)
+getgenv().aaa = bozo2
+while getgenv().aaa do task.wait(0.1)
+for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+v.Humanoid.HealthChanged:Connect(function()
+if getgenv().aaa == true then
+v.Humanoid.Health = 0
+           end
+	 end)
+    end 
+  end
+end)
+flors:Toggle("Change Attack Size",false, function(bozo2)
+getgenv().MKLK = bozo2
+end)
+flors:Textbox("Size", "", true, function(t)
+	getgenv().MKLN = t
+end)
+flors:Textbox("Juice Ammount", "", true, function(p)
+	getgenv().Ammount = p
+end)
+flors:Dropdown("Buy Juice",{"Cider+","Lemonade+","Juice+","Smoothie+"}, function(juice)
+for i = 1,getgenv().Ammount do
+local args = {
+    [1] = juice
+}
+
+workspace.Merchants.BetterDrinkMerchant.Clickable.Retum:FireServer(unpack(args))
+end
+end)
+flors:Button("Haki 1", function()
+local user = workspace.UserData['User_'..game.Players.LocalPlayer.UserId]
+game:GetService("RunService").RenderStepped:Connect(function()
+local args = {
+    [1] = "On",
+    [2] = 1
+}
+user.III:FireServer(unpack(args))
+   end)
+end)
+flors:Button("Haki 2", function()
+local user = workspace.UserData['User_'..game.Players.LocalPlayer.UserId]
+game:GetService("RunService").RenderStepped:Connect(function()
+local args = {
+    [1] = "Off",
+    [2] = 1
+}
+user.III:FireServer(unpack(args))
+   end)
+end)
+flors:Toggle("Auto Compass",false, function(compass)
+local user = workspace.UserData['User_'..game.Players.LocalPlayer.UserId]
+getgenv().compass = compass
+task.spawn(function()
+while getgenv().compass do task.wait(0.5)
+local args = {
+    [1] = "Claim1"
+}
+
+workspace.Merchants.QuestMerchant.Clickable.Retum:FireServer(unpack(args))
+ end
+end)
+while getgenv().compass do task.wait(0.1)
+    for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+	if v.Name == "Compass" then
+    local a = Instance.new("Part", workspace)
+    a.CanCollide = false
+    a.Anchored = true
+    a.Position = v.Poser.Value
+   v.Parent = game.Players.LocalPlayer.Character
+   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = a.CFrame
+   task.wait(1)
+   game.Players.LocalPlayer.Character["Compass"]:Activate()
+   a:Destroy()
+   task.wait(2)
+   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = getgenv().a
+	   end
+    end
+  end
+ end)
+flors:Toggle("Get Dropped Items",false, function(sex)
+getgenv().Dropped = sex
+    local speaker = game.Players.LocalPlayer
+	local Human = speaker.Character:FindFirstChildWhichIsA("Humanoid")
+	for _,v in ipairs(workspace:GetChildren()) do
+		if speaker.Character and v:IsA("BackpackItem") and v:FindFirstChild("Handle") and getgenv().Dropped == true then
+			Human:EquipTool(v)
+		end
+	end
+	for i,v2 in pairs(workspace:GetDescendants()) do
+		if speaker.Character and v2:IsA("Tool") and v2.Name:match("Fruit") and v2.Parent ~= speaker.Character and getgenv().Dropped == true then
+		fireclickdetector(v2.Main.ClickDetector)
+		end
+	end
+	workspace.ChildAdded:Connect(function(v)
+		if speaker.Character and v:IsA("BackpackItem") and v:FindFirstChild("Handle") and getgenv().Dropped == true then
+			speaker.Character:WaitForChild("Humanoid"):EquipTool(v)
+		  end
+	end)
+   	workspace.ChildAdded:Connect(function(v22)
+		if speaker.Character and v22:IsA("Tool") and v22.Name:match("Fruit") and v22.Parent ~= speaker.Character and getgenv().Dropped == true then
+		fireclickdetector(v22.Main.ClickDetector,math.huge)
+		  end
+	end)
+end)
+
+flors:Button("God Mode", function()
+for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+if v.Name == "SanguineVampiris" or v.Name == "Control" or v.Name == "Damage" then
+v:Remove()
+end
+end
+local h; 
+h = hookmetamethod(game,'__namecall',function(self,...)
+if tostring(self) == "Drown" and getnamecallmethod() == "FireServer" then
+return;
+end
+return h(self,...)
+end)
+end)
+flors:Button("Safezone", function()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace:FindFirstChild(getgenv().name).CFrame + Vector3.new(0, 1, 0)
+end)
+flors:Button("CheckPoint", function()
+getgenv().a = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+end)
+--game:GetService("Workspace").Altar o bagulho do legend
+flors:Button("Auto Spawn Location", function()
+	getgenv().bb = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+end)
+flors:Toggle("Auto Spawn",false, function(kkk)
+getgenv().gozei = kkk
+end)
+function spawn(cframe)
+if getgenv().gozei == true then
+    local part = game:GetService('Players').LocalPlayer.Character:WaitForChild('HumanoidRootPart')
+    
+    local args = {
+        [1] = game:GetService("Players").LocalPlayer
+    }
+    game:GetService("Players").LocalPlayer.Character:WaitForChild('CharacterTrait'):WaitForChild('ClothingTrigger'):FireServer()
+    game:GetService('Players').LocalPlayer.Character:WaitForChild('Weapons'):FireServer()
+    game:GetService("Players").LocalPlayer.Character:WaitForChild('CamScript'):WaitForChild('ClientServerClient'):FireServer(unpack(args))
+    
+    game:GetService("Players").LocalPlayer.PlayerGui.Load.Enabled = false
+    
+    task.wait(3)
+    
+    part.CFrame = cframe
+end
+end
+task.spawn(function()
+while task.wait() do
+   if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild('Load') then
+       if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild('Load').Enabled == true then
+           spawn(getgenv().bb)
+           task.wait(2)
+           spawn(getgenv().bb)
+       end
+   end
+ end
+end)
+flors:Textbox("Tool Name", "", true, function(p)
+for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+if v.Name:lower():sub(1, #p):match(p:lower()) then
+getgenv().Weapon = v.Name
+  end
+ end
+end)
+flors:Toggle("Auto Equip", false, function(fuck)
+getgenv().AutoEq = fuck
+while getgenv().AutoEq do task.wait(0.1)
+game.Players.LocalPlayer.Character.Humanoid:EquipTool(game.Players.LocalPlayer.Backpack:FindFirstChild(getgenv().Weapon))
+   end
+end)
+flors:Slider("WalkSpeed", 16, 150, 0, function(speed)
+getgenv().WalkSpeedValue = speed;
+local Player = game:service'Players'.LocalPlayer;
+Player.Character.Humanoid:GetPropertyChangedSignal'WalkSpeed':Connect(function()
+if getgenv().RALK == true then
+Player.Character.Humanoid.WalkSpeed = getgenv().WalkSpeedValue;
+      end
+   end)
+end)
+flors:Toggle("Speed Toogle", false, function(hoho)
+getgenv().RALK = hoho
+end)
+flors:Slider("JumpPower", 50, 400, 0, function(jump)
+while getgenv().RAL do task.wait()
+game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').JumpPower = jump
+   end
+if getgenv().RAL == false then
+game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').JumpPower = 50
+   end
+end)
+flors:Toggle("Jump Toogle", false, function(hoho)
+getgenv().RAL = hoho
+end)
+flors:Toggle("Hitbox Extender", false, function(bb)
+	getgenv().kj = bb
+	task.spawn(function()
+    while getgenv().kj do task.wait()
+    for i,v in pairs(game.Players:GetChildren()) do
+	if v ~= game.Players.LocalPlayer then
+    v.Character.HumanoidRootPart.Transparency = 0.9
+		    end
+	     end
+	  end
+end)
+	if getgenv().kj == false then
+    for i,v in pairs(game.Players:GetChildren()) do
+	if v ~= game.Players.LocalPlayer then
+	v.Character.HumanoidRootPart.Transparency = 1
+    v.Character.HumanoidRootPart.Size = Vector3.new(2, 2, 1)
+     end
+	end
+   end
+  end)
+flors:Slider("Hitbox Size", 2, 100, 0, function(t)
+getgenv().hit = t
+	while getgenv().kj do task.wait()
+	for i,v in pairs(game.Players:GetChildren()) do
+	if v ~= game.Players.LocalPlayer then
+	v.Character.HumanoidRootPart.Size = Vector3.new(getgenv().hit, getgenv().hit, getgenv().hit)
+	      end
+	   end
+	end
+end)
+flors:Slider("Fly Speed", 20, 50, 0, function(flyspeed)
+getgenv().FlySpeed = flyspeed
+end)
+flors:Textbox("Player TP", "", true, function(bin)
+for i,v in pairs(game.Players:GetChildren()) do
+if v.Name:lower():sub(1, #bin):match(bin:lower()) then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Character.HumanoidRootPart.CFrame
+  end
+ end
+end)
+--game:GetService("Workspace").Altar o bagulho do legend
+flors:Toggle("Fly", false, function(eita)
+    getgenv().flores = eita
+	speaker = game.Players.LocalPlayer
+	speaker.Character:FindFirstChildOfClass('Humanoid').PlatformStand = true
+	local Head = speaker.Character:WaitForChild("Head")
+	Head.Anchored = true
+	CFspeed = getgenv().FlySpeed
+	deltaTime = 1.1
+	task.spawn(function()
+        while getgenv().flores do task.wait()
+		CFspeed = getgenv().FlySpeed
+		local moveDirection = speaker.Character:FindFirstChildOfClass('Humanoid').MoveDirection * (CFspeed * deltaTime)
+		local headCFrame = Head.CFrame
+		local cameraCFrame = workspace.CurrentCamera.CFrame
+		local cameraOffset = headCFrame:ToObjectSpace(cameraCFrame).Position
+		cameraCFrame = cameraCFrame * CFrame.new(-cameraOffset.X, -cameraOffset.Y, -cameraOffset.Z + 1)
+		local cameraPosition = cameraCFrame.Position
+		local headPosition = headCFrame.Position
+		local objectSpaceVelocity = CFrame.new(cameraPosition, Vector3.new(headPosition.X, cameraPosition.Y, headPosition.Z)):VectorToObjectSpace(moveDirection)
+		Head.CFrame = CFrame.new(headPosition) * (cameraCFrame - cameraPosition) * CFrame.new(objectSpaceVelocity)
+		end
+	end)
+	if getgenv().flores == false then
+		speaker.Character:FindFirstChildOfClass('Humanoid').PlatformStand = false
+		local Head = speaker.Character:WaitForChild("Head")
+		Head.Anchored = false
+	end
+end)
+flors:Toggle("NoClip",false, function(bool)
+	local speaker = game.Players.LocalPlayer
+	getgenv().clip = bool
+	local function NoclipLoop()
+		if getgenv().clip == true and speaker.Character ~= nil then
+			for _, child in pairs(speaker.Character:GetDescendants()) do
+				if child:IsA("BasePart") and child.CanCollide == true then
+					child.CanCollide = false
+				end
+			end
+		end
+	end
+Clipping = game:GetService('RunService').Stepped:Connect(NoclipLoop)
+	if getgenv().clip == false then
+    Clipping:Disconnect()
+	end
+end)
+flors:Toggle("No Water Damage",false, function(fruitch)
+getgenv().ugueis = fruitch
+if getgenv().ugueis == true then
+workspace.UserData['User_'..game.Players.LocalPlayer.UserId].Data["DevilFruit"].Value = "None"
+workspace.UserData['User_'..game.Players.LocalPlayer.UserId].Data["DevilFruit2"].Value = "None"
+end
+if getgenv().ugueis == false then
+workspace.UserData['User_'..game.Players.LocalPlayer.UserId].Data["DevilFruit"].Value = getgenv().fruit1
+workspace.UserData['User_'..game.Players.LocalPlayer.UserId].Data["DevilaaaaaFruit2"].Value = getgenv().fruit2
+end
+end)
+flors:Button("Drop Juices", function()
+ local plr = game.Players.LocalPlayer
+local backpack = plr.Backpack
+local humanoid = plr.Character:FindFirstChild('Humanoid') or workspace:FindFirstChild(game:GetService('Players').LocalPlayer.Name):FindFirstChild('Humanoid')
+local juices2 = {
+    'Juice',
+    'Cider',
+    'Lemonade',
+    'Smoothie',
+    'Banana Juice',
+    'Coconut Milk',
+    'Fruit Juice',
+    'Sour Juice',
+    'Pumpkin Juice',
+    'Apple Juice',
+    'Golden Apple',
+    'Juice+',
+    'Cider+',
+    'Lemonade+',
+    'Smoothie+'
+}
+
+    for _, v in pairs(backpack:GetChildren()) do
+        if table.find(juices2, v.Name) then
+        v.Parent = game.Players.LocalPlayer.Character
+		task.wait(0.1)
+		v.Parent = workspace
+        end
+      end
+end)
+flors:Toggle("Auto Farm ALL NPCS", false, function(b)
+getgenv().FARMING = b
+getgenv().MOB = nil
+function mob()
+for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+if v:FindFirstChild("Humanoid").Health > 0 then
+getgenv().MOB = v
+    end
+  end 
+end
+while getgenv().FARMING do task.wait()
+if getgenv().MOB == nil or getgenv().MOB.Humanoid.Health == 0 then
+task.wait(0.2)
+mob()
+end
+local cf = getgenv().MOB:WaitForChild("HumanoidRootPart").CFrame
+local lv = cf.lookVector
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = cf + (lv * Vector3.new(-3,-3,-3))
+vu:ClickButton1(Vector2.new(0,0))
+	end
+end)
+local hmm;
+hmm = hookmetamethod(game, '__namecall', function(self,...)
+local args = {...}
+local met = getnamecallmethod()
+if tostring(self) == "RemoteEvent" and tostring(met) == "FireServer" and getgenv().MKLK == true and args[3] == "StopCharging" then
+args[6] = getgenv().MKLN
+return self.FireServer(self, unpack(args))
+end
+return hmm(self,...)
+end)
